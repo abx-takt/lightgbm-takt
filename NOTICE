@@ -1,0 +1,15 @@
+lightgbm-takt 4.7.0 is the official LightGBM 4.7.0 Python wheel with one file replaced.
+
+- lightgbm/lib/lib_lightgbm.so is a modified build of the LightGBM 4.7.0 library made by TAKT (ABX DEVELOPMENT LLP,
+  trading as TAKT, https://taktcycles.com). It is the only file in this package that contains TAKT contributions.
+  The TAKT contributions in it are licensed under LICENSE-TAKT.txt (TAKT Free Binary Licence, version 1). The
+  LightGBM code in it remains under LightGBM's MIT licence (LICENSE), and the third-party components that the
+  official LightGBM build bundles into that file remain under their own licences. The source of the TAKT
+  contributions is not published.
+- Every other file is LightGBM's own code: the official LightGBM 4.7.0 Python package
+  (https://github.com/lightgbm-org/LightGBM), unchanged, under the MIT licence in LICENSE, which is included
+  unchanged with its copyright notice.
+
+This package is therefore not an unmodified LightGBM release, and it is not licensed under the MIT licence alone.
+
+Not affiliated with or endorsed by the LightGBM project or Microsoft.

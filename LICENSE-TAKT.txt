@@ -1,0 +1,64 @@
+TAKT Free Binary Licence, version 1
+
+1. Scope and third-party rights. This licence is granted by ABX DEVELOPMENT LLP,
+registered in Scotland under no. SO301872, trading as TAKT (https://taktcycles.com).
+It applies only to the rights that TAKT is entitled to license in its proprietary
+contributions embodied in the binary files identified under this licence in the
+notices accompanying this release (the "TAKT contributions"). It does not replace
+the licences of third-party components, including components within those files.
+Those licences and their copyright and permission notices remain applicable.
+Nothing here restricts rights independently granted under those licences, rights
+in your own code or data, or rights previously granted for an earlier release.
+
+2. Free grant. Subject to this licence, TAKT grants you a worldwide, non-exclusive,
+royalty-free licence, without a fixed expiry date, to install, run and copy the
+TAKT contributions as supplied in this release, for any purpose, including
+commercial use, and to redistribute the package unchanged with this licence and
+all accompanying notices. Commercial use of the functionality supplied under this
+licence does not require purchase of another licence. No source code, optimiser,
+support service or future update is included in this grant.
+
+3. Restrictions. Subject to clauses 1 and 4, you must not modify the TAKT
+contributions, distribute modified TAKT contributions, decompile, disassemble
+or otherwise reverse engineer them, or circumvent technical restrictions on
+their use expressly described in the documentation accompanying this release.
+These restrictions do not prevent you from modifying third-party components
+under their own licences or replacing the TAKT binaries with a separately
+licensed implementation that does not use the TAKT contributions.
+
+4. Rights preserved by law. No provision of this licence restricts an act that
+applicable law permits notwithstanding a contractual restriction. This includes
+necessary backup copying, observation, study or testing during authorised use,
+and decompilation for interoperability, in each case subject to the conditions
+imposed by that law. Performing such a permitted act does not breach this licence.
+
+5. Functionality and other offerings. The documentation accompanying this release
+identifies the scope and limits of the supplied TAKT functionality. Any additional
+TAKT build, functionality or service is supplied only under a separately accepted
+agreement, which may require payment. A link to TAKT's Terms of Service does not
+by itself incorporate those terms into this licence or create a payment obligation.
+This licence does not restrict functionality available under the licences of
+third-party components merely because this release does not accelerate it.
+
+6. Warranty and liability. Except for rights that cannot lawfully be excluded and
+obligations separately agreed by TAKT, the TAKT contributions are supplied "as is",
+without warranty. To the extent permitted by applicable law, TAKT excludes liability
+for loss arising from their use. Nothing here excludes or limits liability for
+fraud, death or personal injury caused by negligence, or any other liability that
+cannot lawfully be excluded or limited. This clause does not reduce rights or
+remedies under a separately accepted order or applicable third-party licences.
+
+7. Termination. Subject to applicable law, your rights granted by clause 2 end
+automatically if you breach this licence. You must then cease using and distributing
+the TAKT contributions and delete your copies except to the extent retention is
+required or permitted by mandatory law. Termination does not affect rights
+independently granted under third-party licences or terminate the licences of
+recipients who lawfully obtained copies and remain in compliance themselves.
+
+8. Law and versions. This licence is governed by the law of Scotland, and the courts
+of Scotland have non-exclusive jurisdiction. This does not remove any protection
+or right to bring proceedings elsewhere that mandatory applicable law gives you,
+including any applicable consumer protection. This version governs the rights it
+grants for this release; a later licence or website change does not reduce them.
+A separately accepted order governs the deliveries and services supplied under
+that order, and its rights and remedies are not reduced by this licence.
