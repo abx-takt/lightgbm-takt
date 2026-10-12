@@ -6,10 +6,11 @@ build of LightGBM 4.7.0. Every prediction is identical to the official wheel, bi
 
 **What this free package accelerates, and its limits.** Repeated-call analyses are accelerated on models with up
 to 300 trees: permutation importance, partial dependence and ICE curves, MDA feature importance across
-cross-validation folds, and what-if scenario sweeps, which call `predict` many times. Everything else runs
-LightGBM's own code at its normal speed, with the full LightGBM functionality available: training, single
-predictions, batch scoring, SHAP values, models with more than 300 trees, every parameter and input type. A
-commercial licence covers the full version (see "Full version" below).
+cross-validation folds, and what-if scenario sweeps, which call `predict` many times. The accelerated part runs on
+one thread; when LightGBM itself runs on several threads, it is used only where it is faster than LightGBM's own
+multi-threaded code. Everything else runs LightGBM's own code at its normal speed, with the full LightGBM
+functionality available: training, single predictions, batch scoring, SHAP values, models with more than 300
+trees, every parameter and input type. A commercial licence covers the full version (see "Full version" below).
 
 Not affiliated with or endorsed by the LightGBM project or Microsoft.
 
@@ -26,41 +27,71 @@ Linux x86-64, glibc 2.27 or newer (the same platforms as the official wheel), Py
 ## What is faster
 
 Factors over the official LightGBM 4.7.0 wheel for the whole Python process (start-up, imports, data loading,
-the analysis), on one core, by CPU cycles (`cycles:u`) with 95% confidence intervals, measured on AMD Zen 3
-(Threadripper PRO 5975WX) and AMD Zen 4 (Ryzen 9 7950X3D). The output was identical to the official wheel in every
-run. The rows marked "LightGBM's own code" show that everything outside the free scope runs at the official
-speed.
+the analysis), with LightGBM on one thread, by CPU cycles (`cycles:u`) with 95% confidence intervals, measured on
+AMD Zen 3 (Threadripper PRO 5975WX) and AMD Zen 4 (Ryzen 9 7950X3D). The output was identical to the official
+wheel in every run. The rows marked "LightGBM's own code" show that everything outside the free scope runs at the
+official speed.
 
 | Analysis | AMD Zen 3 | AMD Zen 4 |
 |---|---:|---:|
-| Permutation importance (Alpha158 quant features, 300 trees) | **3.30×** (3.19–3.33) | **2.74×** (2.70–2.86) |
-| Partial dependence + ICE (the same model, 20 features) | **3.67×** (3.58–3.76) | **3.12×** (3.08–3.26) |
-| Permutation importance (OpenML kick, categorical and missing values, 300 trees) | **2.63×** (2.62–2.67) | **2.82×** (2.68–2.87) |
-| What-if scenarios (kick model, 30 scenarios) | **2.50×** (2.48–2.52) | **2.60×** (2.53–2.76) |
-| MDA importance across 5 folds, fitting included | **2.02×** (2.02–2.04) | **2.05×** (2.01–2.08) |
-| Partial dependence + ICE (California housing regressor, 300 trees) | **1.75×** (1.70–1.78) | **1.58×** (1.50–1.64) |
-| Batch `predict_proba`, quant features (LightGBM's own code) | 1.01× (1.00–1.02) | 1.03× (0.99–1.06) |
-| Batch `predict_proba`, kick (LightGBM's own code) | 1.00× (0.99–1.00) | 1.02× (0.99–1.05) |
-| `shap.PermutationExplainer` (LightGBM's own code) | 1.02× (1.01–1.03) | 1.03× (1.00–1.05) |
-| Permutation importance on a 500-tree model (over the limit: LightGBM's own code) | 1.01× (0.99–1.03) | 1.02× (0.97–1.05) |
-| Permutation importance on a 1,000-tree model (over the limit: LightGBM's own code) | 1.02× (1.01–1.03) | 1.04× (1.01–1.06) |
-| C API batch prediction, one thread (LightGBM's own code) | 1.03× (1.01–1.06) | 1.03× (1.02–1.04) |
+| Permutation importance (Alpha158 quant features, 300 trees) | **3.67×** (3.60–3.75) | **3.40×** (3.36–3.48) |
+| Partial dependence + ICE (the same model, 20 features) | **4.23×** (4.20–4.36) | **3.84×** (3.79–3.90) |
+| Permutation importance (OpenML kick, categorical and missing values, 300 trees) | **3.71×** (3.65–3.74) | **3.81×** (3.70–3.93) |
+| Permutation importance (synthetic data, 50 features, 300 trees, numpy) | **5.04×** (5.01–5.09) | **4.93×** (4.84–5.01) |
+| What-if scenarios (kick model, 30 scenarios) | **2.88×** (2.85–2.89) | **3.08×** (3.02–3.15) |
+| MDA importance across 5 folds, fitting included | **2.96×** (2.95–2.98) | **2.98×** (2.95–3.02) |
+| Partial dependence + ICE (California housing regressor, 300 trees) | **1.71×** (1.69–1.77) | **1.53×** (1.45–1.62) |
+| Batch `predict_proba`, quant features (LightGBM's own code) | 1.00× (0.99–1.01) | 1.01× (0.98–1.03) |
+| Batch `predict_proba`, kick (LightGBM's own code) | 0.99× (0.98–1.00) | 1.00× (0.98–1.01) |
+| `shap.PermutationExplainer` (LightGBM's own code) | 1.00× (0.99–1.02) | 1.02× (1.00–1.04) |
+| Permutation importance on a 500-tree model (over the limit: LightGBM's own code) | 1.02× (1.00–1.03) | 1.00× (1.00–1.02) |
+| Permutation importance on a 1,000-tree model (over the limit: LightGBM's own code) | 1.01× (1.00–1.03) | 1.02× (1.01–1.03) |
+| C API batch prediction, one thread (LightGBM's own code) | 1.01× (1.00–1.04) | 1.01× (0.98–1.04) |
 
 The analyses are scikit-learn's `permutation_importance` and `partial_dependence` (`kind="both"`, grid of 50)
 called on an `LGBMClassifier`/`LGBMRegressor` with `n_jobs=1`, unchanged. Every reading and the scripts:
 https://taktcycles.com/showcase/lightgbm/README.html?src=pypi-lightgbm
 
-The accelerated analyses run on one thread. If your analysis calls LightGBM with several threads, calls where the
-original multi-threaded code is expected to be faster run it, so the gain is smaller.
+**With LightGBM on several threads** (its default in the scikit-learn API), the gain is smaller or none, and no
+measured analysis is slower than with the official wheel beyond its confidence interval. Elapsed-time factors with LightGBM's default thread
+count (7 CPUs on Zen 3, 4 cores on Zen 4), 95% confidence intervals:
+
+| Analysis, LightGBM's default threads | AMD Zen 3 | AMD Zen 4 |
+|---|---:|---:|
+| Permutation importance (synthetic data, 50 features, numpy) | 1.09× (1.07–1.11) | 1.40× (1.37–1.42) |
+| The same with a pandas DataFrame | 1.11× (1.04–1.15) | 1.42× (1.36–1.44) |
+| Permutation importance (OpenML kick, 300 trees) | 1.28× (1.27–1.29) | 1.69× (1.66–1.71) |
+| MDA importance across 5 folds | 1.10× (1.09–1.11) | 1.36× (1.35–1.39) |
+| What-if scenarios (kick model) | 1.03× (1.02–1.03) | 1.09× (1.06–1.10) |
+| Permutation importance (Alpha158 quant features, 300 trees) | 1.00× (0.97–1.04) | 1.03× (0.94–1.11) |
+| Partial dependence + ICE (the same model) | 1.00× (0.99–1.02) | 1.03× (0.95–1.06) |
+| Partial dependence + ICE (California housing) | 1.01× (0.98–1.03) | 1.03× (0.99–1.05) |
+
+Readings with 4 and 8 LightGBM threads, and with LightGBM's own code (batch prediction, explainers, larger
+models), are in the showcase; none is slower than the official wheel beyond its confidence interval.
+
+## What changed in 4.7.0.post1
+
+- **Several LightGBM threads.** In 4.7.0 the accelerated part could be slower than LightGBM's own multi-threaded
+  prediction, so analyses run with LightGBM's default threads took up to 1.47 times as long as with the official
+  wheel (partial dependence on the quant-feature model, Zen 3, 7 threads). 4.7.0.post1 uses the accelerated part
+  only where it is faster and LightGBM's own code everywhere else.
+- **One thread.** Sweeps that change a different column at each step (permutation importance, what-if scenarios)
+  are faster than in 4.7.0, for example permutation importance on the kick model
+  3.71× instead of 2.65× on Zen 3.
+- Unchanged: the scope (repeated-call analyses on models up to 300 trees), the Python package, and every output,
+  identical to the official wheel bit for bit.
 
 ## The same output, bit for bit
 
 Every number this package returns matches the official LightGBM wheel on the same machine. We check 4,497
 prediction cases (about 1.06 billion values) on 23 public models: regression, binary, multiclass, ranking, DART,
 random forest, linear trees, categorical- and missing-heavy data, adversarial inputs (NaN, ±inf, −0, subnormals,
-values exactly on split thresholds), every input type and prediction type. LightGBM's own C++ test suite (34 of 34)
-and Python test suite (1,689 passed; the same 4 graphviz plotting tests fail with the official wheel when the
-`dot` binary is missing) give the same results as with the official wheel.
+values exactly on split thresholds), every input type and prediction type, on one and several threads.
+LightGBM's own C++ test suite (34 of 34) and Python test suite (1,689 passed; the same 4 graphviz plotting tests
+fail with the official wheel when the `dot` binary is missing) give the same results as with the official wheel.
+Five 30-minute soak runs on the two machines, with LightGBM on 1, 2 and 4 threads and 12 Python threads each,
+every accelerated call recomputed by LightGBM's original code and compared, found no difference in 675,078 calls.
 
 Check it yourself. The script `verify.py` (in the GitHub repository, reproduced below) trains a 300-tree model on
 synthetic data and prints a permutation importance and a partial dependence curve to 17 significant digits; the time
