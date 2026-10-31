@@ -1,7 +1,7 @@
 {
-  "schema": 1,
+  "schema": 2,
   "repository": "abx-takt/store-build-inputs",
-  "tag": "store-inputs-2026-10-31-v6",
+  "tag": "inputs-git-2026-10-31-v6",
   "asset": "lightgbm-takt-4.7.0.post6-inputs.zip",
   "sha256": "f55a15657c46ab206957fa646de20f4c4afc874b3d90e8113256da338ce2e6f2",
   "files": {
@@ -13,5 +13,8 @@
       "sha256": "4eea04a2a9f73586192b40467bb44d38d33ad3a6c9f777d828da434848855dcb",
       "bytes": 9308552
     }
-  }
+  },
+  "release_tag": "store-inputs-2026-10-31-v6",
+  "commit": "7f34571aee38da77a376fb28c5fea086a0c0b59e",
+  "path": "inputs/lightgbm-takt-4.7.0.post6-inputs.zip"
 }
