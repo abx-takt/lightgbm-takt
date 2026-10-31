@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "repository": "abx-takt/store-build-inputs",
+  "tag": "store-inputs-2026-10-31-v6",
+  "asset": "lightgbm-takt-4.7.0.post6-inputs.zip",
+  "sha256": "f55a15657c46ab206957fa646de20f4c4afc874b3d90e8113256da338ce2e6f2",
+  "files": {
+    "lightgbm_takt-4.7.0.post2-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl": {
+      "sha256": "26f04d7163cb8ced989913065638b5439a2dd874e198b0c104da6f31d8a4b4cb",
+      "bytes": 3570472
+    },
+    "native-0-lib_lightgbm.input.so": {
+      "sha256": "4eea04a2a9f73586192b40467bb44d38d33ad3a6c9f777d828da434848855dcb",
+      "bytes": 9308552
+    }
+  }
+}

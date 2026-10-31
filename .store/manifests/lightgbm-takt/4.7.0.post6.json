@@ -1,0 +1,24 @@
+{
+  "profile": "store",
+  "package": "lightgbm-takt",
+  "version": "4.7.0.post6",
+  "import_package": "lightgbm",
+  "source_wheel": {
+    "path": "store-inputs/lightgbm_takt-4.7.0.post2-py3-none-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+    "sha256": "26f04d7163cb8ced989913065638b5439a2dd874e198b0c104da6f31d8a4b4cb"
+  },
+  "native_replacements": [
+    {
+      "member": "lightgbm/lib/lib_lightgbm.so",
+      "path": "store-inputs/native-0-lib_lightgbm.input.so",
+      "sha256": "4eea04a2a9f73586192b40467bb44d38d33ad3a6c9f777d828da434848855dcb",
+      "evidence": {
+        "kind": "pre-protection input",
+        "sha256": "4eea04a2a9f73586192b40467bb44d38d33ad3a6c9f777d828da434848855dcb",
+        "existing_protector_receipt_sha256": "db578e84045bdaa5594645806a7e4cd08fd85f15a3d682804c35ea47e5080f85",
+        "store_transform": "identity; protector bypassed"
+      }
+    }
+  ],
+  "upstream_native_members": []
+}
